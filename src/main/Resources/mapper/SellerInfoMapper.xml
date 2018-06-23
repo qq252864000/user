@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.authority.dao.SellerInfoMapper">
+    <insert id="save" parameterType="map">
+        insert into seller_info (seller_id,user_name,password,openid)
+        values
+        <foreach collection="sellerInfoList" item="info" separator=",">
+            (#{info.sellerId},#{info.userName},#{info.password},#{info.openid})
+        </foreach>
+
+    </insert>
+
+    <update id="update" parameterType="map">
+        <foreach collection="sellerInfoList" item="info" separator=";">
+            update seller_info
+            set user_name = #{info.userName},password = #{info.password}, openid = #{info.openid}
+        </foreach>
+    </update>
+
+</mapper>
